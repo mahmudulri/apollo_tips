@@ -81,3 +81,10 @@ class Homepage extends StatelessWidget {
     );
   }
 }
+
+
+  // String myName = "Over 2.5 @1.50";
+  // String before = myName.substring(0, myName.indexOf('@'));
+  // String after = myName.substring(myName.indexOf('@') + 1, myName.length);
+  // print(before);
+  // print(after);
