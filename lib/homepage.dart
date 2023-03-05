@@ -1,4 +1,4 @@
-import 'package:apollo_betting_tips/pages/regular_tips.dart';
+import 'package:apollo_betting_tips/pages/regular/regular_tips.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
