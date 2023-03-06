@@ -6,7 +6,7 @@ class RegularApi {
 
   static Future fetPostData() async {
     var response = await client.get(Uri.parse(
-        "https://script.google.com/macros/s/AKfycbz0yuiAZVUrGJlfk-paTs6eildZjSeLMvqrcTWhUa_S2i37RbKzmklqbsbHxXnnNHjD/exec"));
+        "https://script.google.com/macros/s/AKfycbwUodmPV7RNV_Y1uXjJFfi91rP9t2RhfKR3LC25h1lVAuE-Mgwr2r4BWUshQncHdhsp/exec"));
 
     if (response.statusCode == 200) {
       var postjsonData = response.body;

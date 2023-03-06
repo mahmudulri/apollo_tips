@@ -12,14 +12,14 @@ String regularModelToJson(List<RegularModel> data) =>
 
 class RegularModel {
   RegularModel({
-    required this.legue,
-    required this.team,
-    required this.score,
+    this.legue,
+    this.team,
+    this.score,
   });
 
-  String legue;
-  String team;
-  String score;
+  String? legue;
+  String? team;
+  String? score;
 
   factory RegularModel.fromJson(Map<String, dynamic> json) => RegularModel(
         legue: json["legue"],

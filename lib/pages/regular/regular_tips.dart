@@ -1,7 +1,5 @@
-import 'dart:convert';
-
-import 'package:apollo_betting_tips/pages/regular/custom_model.dart';
 import 'package:apollo_betting_tips/pages/regular/regular_controller.dart';
+import 'package:apollo_betting_tips/pages/regular/regularmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
@@ -15,37 +13,10 @@ class RegularTips extends StatefulWidget {
 }
 
 class _RegularTipsState extends State<RegularTips> {
-  // RegularController regularController = Get.put(RegularController());
-
-  List<CustomModel> feedbacks = <CustomModel>[];
-
-  getmyFinalData() async {
-    var raw = await http.get(Uri.parse(
-        "https://script.google.com/macros/s/AKfycbz0yuiAZVUrGJlfk-paTs6eildZjSeLMvqrcTWhUa_S2i37RbKzmklqbsbHxXnnNHjD/exec"));
-    var jsonData = jsonDecode(raw.body);
-    // print(jsonData);
-
-    // feedbacks = jsonData.map((json) => CustomModel.fromJson(json));
-
-    jsonData.forEach((element) {
-      print("$element  the is next");
-
-      CustomModel customModel = CustomModel();
-      customModel.legue = element['legue'];
-      customModel.team = element['team'];
-      customModel.score = element['score'];
-
-      feedbacks.add(customModel);
-      print(feedbacks[0].legue.toString());
-    });
-
-    // print(feedbacks[0].legue);
-  }
+  RegularController regularController = Get.put(RegularController());
 
   @override
   void initState() {
-    getmyFinalData();
-
     super.initState();
   }
 
@@ -85,7 +56,7 @@ class _RegularTipsState extends State<RegularTips> {
                       height: 3,
                     );
                   },
-                  itemCount: feedbacks.length,
+                  itemCount: regularController.allmytips.length,
                   itemBuilder: (context, index) {
                     return Container(
                       height: screenHeight * 0.130,
@@ -95,15 +66,11 @@ class _RegularTipsState extends State<RegularTips> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.only(
-                          right: 5,
-                        ),
-                        child: MytipsData(
-                          legue: feedbacks[index].legue,
-                          team: feedbacks[index].team,
-                          score: feedbacks[index].score,
-                        ),
-                      ),
+                          padding: const EdgeInsets.only(
+                            right: 5,
+                          ),
+                          child: Text(regularController.allmytips[index].legue
+                              .toString())),
                     );
                   },
                 ),
@@ -112,25 +79,6 @@ class _RegularTipsState extends State<RegularTips> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class MytipsData extends StatelessWidget {
-  String? legue;
-  String? team;
-  String? score;
-
-  MytipsData({
-    this.legue,
-    this.team,
-    this.score,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [Text('from $legue')],
     );
   }
 }
