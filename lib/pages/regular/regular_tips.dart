@@ -1,9 +1,8 @@
 import 'package:apollo_betting_tips/pages/regular/regular_controller.dart';
-import 'package:apollo_betting_tips/pages/regular/regularmodel.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 
 class RegularTips extends StatefulWidget {
   RegularTips({super.key});
@@ -49,32 +48,36 @@ class _RegularTipsState extends State<RegularTips> {
                   color: Colors.white38,
                 ),
               ),
-              Expanded(
-                child: ListView.separated(
-                  separatorBuilder: (context, index) {
-                    return SizedBox(
-                      height: 3,
-                    );
-                  },
-                  itemCount: regularController.allmytips.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      height: screenHeight * 0.130,
-                      width: screenWidth,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Padding(
-                          padding: const EdgeInsets.only(
-                            right: 5,
-                          ),
-                          child: Text(regularController.allmytips[index].legue
-                              .toString())),
-                    );
-                  },
-                ),
-              ),
+              Expanded(child: Obx(() {
+                if (regularController.isLoading.value) {
+                  return Center(child: CircularProgressIndicator());
+                } else {
+                  return ListView.separated(
+                    separatorBuilder: (context, index) {
+                      return SizedBox(
+                        height: 3,
+                      );
+                    },
+                    itemCount: regularController.allmytips.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        height: screenHeight * 0.130,
+                        width: screenWidth,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Padding(
+                            padding: const EdgeInsets.only(
+                              right: 5,
+                            ),
+                            child: Text(regularController.allmytips[index].legue
+                                .toString())),
+                      );
+                    },
+                  );
+                }
+              })),
             ],
           ),
         ),
